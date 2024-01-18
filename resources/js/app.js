@@ -11,6 +11,8 @@ import addProduct from "@/Component/ProdComp/addProduct.vue";
 import editProduct from "@/Component/ProdComp/editProduct.vue";
 import editCategory from "@/Component/ProdComp/editCategory.vue";
 import addCategory from "@/Component/ProdComp/addCategory.vue";
+import Return from "@/Component/ProdComp/Return.vue";
+import editReturn from "@/Component/ProdComp/editReturn.vue";
 
 import userHome from "@/Component/userHome.vue";
 import { createRouter, createWebHistory } from "vue-router";
@@ -37,6 +39,8 @@ app.component("editproduct", editProduct);
 app.component("category", Category);
 app.component("editcategory", editCategory);
 app.component("addcategory", addCategory);
+app.component("return", Return);
+app.component("editreturn", editReturn);
 app.component("modal", Modal);
 
 app.component("userHome", userHome);

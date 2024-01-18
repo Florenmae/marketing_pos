@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Product;
+use App\Models\ReturnedProduct;
 
 class ProductController extends Controller
 {
@@ -38,6 +39,7 @@ class ProductController extends Controller
         $product->price = $request->prodPayload["price"];
         $product->qty = $request->prodPayload["qty"];
         $product->description = $request->prodPayload["description"];
+        $product->status = $request->prodPayload["status"];
 
         $product->save();
 
@@ -45,21 +47,22 @@ class ProductController extends Controller
 
     }
 
-    public function approveStatus($productId) {
-        $product = Product::find($productId);
-        $product->status = 'approved';
-        $product->save();
+    // public function approveStatus($productId) {
+    //     $product = Product::find($productId);
+    //     $product->status = 'approved';
+    //     $product->save();
     
-        return response()->json(['message' => 'Product status approved']);
-    }
+    //     return response()->json(['message' => 'Product status approved']);
+    // }
     
-    public function rejectStatus($productId) {
-        $product = Product::find($productId);
-        $product->status = 'rejected';
-        $product->save();
+    // public function rejectStatus($productId) {
+    //     $product = Product::find($productId);
+    //     $product->status = 'rejected';
+    //     $product->save();
         
-        return response()->json(['message' => 'Product status rejected']);
-    }
+    //     return response()->json(['message' => 'Product status rejected']);
+    // }
+   
 
     public function deleteProduct(Request $request){
         // dd($request->id);
@@ -67,5 +70,24 @@ class ProductController extends Controller
 
         $res = $deleteProduct->delete();
         return $res;
+    }
+
+    public function getReturnedProducts(){
+        return ReturnedProduct::all();
+    }
+    public function updateReturnedProduct(Request $request){
+        $retproduct = ReturnedProduct :: findOrFail($request->editingReturnedProductId);
+
+        $retproduct->name = $request->retPayload["name"];
+        $retproduct->supplier = $request->retPayload["supplier"];
+        $retproduct->item_code = $request->retPayload["item_code"];
+        $retproduct->qty = $request->retPayload["qty"];
+        $retproduct->remarks = $request->retPayload["remarks"];
+        $retproduct->status = $request->retPayload["status"];
+
+        $retproduct->save();
+
+        return $retproduct;
+
     }
 }

@@ -41,9 +41,6 @@
                         <td class="px-6 py-4">
                             {{ product.status }}
                         </td>
-                        <td>
-                            <editProduct :product="product" />
-                        </td>
                         <td class="py-4">
                             <button
                                 class="bg-red-500 py-2 px-4 rounded text-white"

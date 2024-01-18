@@ -11,7 +11,7 @@
             class="w-6 h-6"
             aria-hidden="true"
             fill="currentColor"
-            viewBox="0 0 20 20"
+            viewBox="0 0 10 10"
             xmlns="http://www.w3.org/2000/svg"
         >
             <path

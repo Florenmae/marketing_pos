@@ -8,7 +8,7 @@
         :save-option="true"
     >
         <form @submit.prevent="submitProduct" class="p-4 md:p-5">
-            <div class="grid gap-4 mb-4 grid-cols-2">
+            <div class="grid gap-4 mb-4 grid-cols-4">
                 <div class="col-span-2">
                     <label
                         for="cat_code"
@@ -168,6 +168,11 @@ export default {
         };
     },
     methods: {
+        getProducts() {
+            axios.get("/get-products").then(({ data }) => {
+                this.products = data;
+            });
+        },
         submitProduct() {
             const { editProduct } = this;
             const prodPayload = {
@@ -177,12 +182,12 @@ export default {
             axios
                 .post("/submit-product", prodPayload)
                 .then(({ data }) => {
-                    this.$router.push("/product");
-                })
-                .catch((error) => {
-                    console.error("Error submitting product:", error);
+                    this.getProducts;
                 });
         },
+    },
+    mounted() {
+        this.getProducts();
     },
 };
 </script>

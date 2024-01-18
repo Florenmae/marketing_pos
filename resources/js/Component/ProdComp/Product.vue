@@ -38,21 +38,7 @@
                         <td class="px-6 py-4">{{ product.price }}</td>
                         <td class="px-6 py-4">{{ product.qty }}</td>
                         <td class="px-6 py-4">{{ product.description }}</td>
-                        <td class="px-6 py-4">
-                            {{ product.status }}
-                            <button
-                                class="bg-green-500 py-2 px-4 rounded text-white"
-                                @click="approveStatus(product.id)"
-                            >
-                                Approve
-                            </button>
-                            <button
-                                class="bg-red-500 py-2 px-4 rounded text-white"
-                                @click="rejectStatus(product.id)"
-                            >
-                                Reject
-                            </button>
-                        </td>
+                        <td class="px-6 py-4">{{ product.status }}</td>
                         <td>
                             <editProduct :product="product" />
                         </td>
@@ -99,17 +85,17 @@ export default {
         };
     },
     methods: {
-        submitProduct() {
-            const { editProduct } = this;
-            const prodPayload = {
-                ...editProduct,
-            };
+        // submitProduct() {
+        //     const { editProduct } = this;
+        //     const prodPayload = {
+        //         ...editProduct,
+        //     };
 
-            axios.post("/submit-product", prodPayload).then(({ data }) => {
-                this.getProducts();
-                this.changeModalStatus();
-            });
-        },
+        //     axios.post("/submit-product", prodPayload).then(({ data }) => {
+        //         this.getProducts;
+               
+        //     });
+        // },
         changeModalStatus() {
             this.modalStatus = !this.modalStatus;
         },
@@ -124,6 +110,7 @@ export default {
             this.editingProductId = product.id;
             this.modalContent.title = "Edit Product";
             this.modalStatus = true;
+            this.getProducts;
         },
 
         updateProduct(data) {
@@ -133,14 +120,14 @@ export default {
             axios
                 .post("/update-product", { prodPayload, editingProductId })
                 .then(({ data }) => {
-                    this.getProducts();
+                    this.getProducts;
                     this.changeModalStatus();
                 })
                 .catch((error) => {
                     console.error("Error updating product:", error);
                 });
         },
-
+        
         deleteProduct(id) {
             axios.post("/delete-product", { id }).then(({ data }) => {
                 this.getProducts();
@@ -159,26 +146,6 @@ export default {
             };
             this.changeModalStatus();
             this.editingProductId = null;
-        },
-        approveStatus(productId) {
-            axios
-                .post(`/products/${productId}/approve`)
-                .then((response) => {
-                    console.log(response.data.message);
-                })
-                .catch((error) => {
-                    console.error(error);
-                });
-        },
-        rejectStatus(productId) {
-            axios
-                .post(`/products/${productId}/reject`)
-                .then((response) => {
-                    console.log(response.data.message);
-                })
-                .catch((error) => {
-                    console.error(error);
-                });
         },
     },
     mounted() {

@@ -3,6 +3,7 @@ import Modal from "@/Component/Modal.vue";
 import MainUser from "@/Component/UserComp/MainUser.vue";
 import Category from "@/Component/ProdComp/Category.vue";
 import Product from "@/Component/ProdComp/Product.vue";
+import Return from "@/Component/ProdComp/Return.vue";
 import userProduct from "@/Component/UserDashboard/userProduct.vue";
 
 import userHome from "@/Component/userHome.vue";
@@ -44,6 +45,11 @@ export const routes = [
         path: "/userProduct",
         name: "userProduct",
         component: userProduct,
+    },
+    {
+        path: "/return",
+        name: "return",
+        component: Return,
     },
     {
         path: "/signup",
